@@ -167,7 +167,7 @@ else{                                                                        // 
         mainContainerDimentions:this.getBoundingClientRect(this.mainContainerReff.current),
         windowDimentions:{width:window.innerWidth,height:window.innerHeight}
       }) */
-      if(this.firstCardReff){
+      if(this.firstCardReff.current){
        this.setState({
         firstCardDimentions:{x:this.firstCardReff.current.offsetLeft,y:this.firstCardReff.current.offsetTop},
        secondCardDimentions:{x:this.secondCardReff.current.offsetLeft,y:this.secondCardReff.current.offsetTop},
@@ -210,7 +210,7 @@ console.log(this.state.thirdCardDimentions);*/
       <div ref={this.mainContainerReff} className="mainContainer">
         <Orbit iconNr= {0} startPos={this.getIconStartPos(0)} destination={{x:400,y:500}} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isTestOnHover} delay = {100}/>
         <button onClick={this.handleTestClick}>aaaa</button>
-      </div>*/}
+      </div>
 {/*       <div className="filler"> asdasd</div>*/}
       
 
