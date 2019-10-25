@@ -34,11 +34,11 @@ const icon = [html5 , css3,  javascript, bootstrap ,jquery ,mongodb ,nodejs ,php
 
 function Comp1(props) {
 
-  const [val, set ] = useSpring(() => ({ xyo: [props.startPos.x,props.startPos.y,0.1],config: config.slow}))
+  const [val, set ] = useSpring(() => ({ xyo: [props.startPos.x,props.startPos.y,1],config: config.slow}))
 //console.log(props.startPos)
 useEffect(() => {
-  setTimeout(() => set(props.isOnHover ? {xyo: [props.destination.x , props.destination.y , props.destination.o ? 1:0.1]} :
-   {xyo: [props.startPos.x,props.startPos.y,0.1]}), props.delay)
+  setTimeout(() => set(props.isOnHover ? {xyo: [props.destination.x , props.destination.y , props.destination.o ? 1:1]} :
+   {xyo: [props.startPos.x,props.startPos.y,1]}), props.delay)
    // set(props.isOnHover?{xyo: [props.dimentions.x,props.dimentions.y,1]}:{xyo: [0,0,0.01]})
     //console.log('count changed', props.destination);
 

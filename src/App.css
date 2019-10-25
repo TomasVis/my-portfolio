@@ -229,7 +229,7 @@ button:hover {
 
 .box, .square {
   pointer-events: none;
-  background-color: black;
+/*  background-color: black;*/
   margin: 4px;
   display: inline-block;
   top: -10px;
@@ -257,10 +257,10 @@ button:hover {
 .square.blue, .box.blue {
   background: blue;
 }
-
+/*
 .square.red, .box.red {
   background: red;
-}
+}*/
 
 .square.orange, .box.orange {
   background: orange;

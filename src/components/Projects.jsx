@@ -12,6 +12,9 @@ import { Spring  } from 'react-spring/renderprops';
 import Comp1 from './Comp1';
 import Orbit from './IconOrbit';
 import Card from './Card';
+import Shop from '../Shop';
+import anime from 'animejs/lib/anime.es.js';
+import Anime from 'react-anime';
 
 
 
@@ -25,7 +28,7 @@ class Projects extends React.Component {
     this.state = {
       id:null,
       isOnHover:false,
-      startPos:[[80,100],[110,400],[180,400],[300,200],[180,200],[280,400],[180,80],[280,500],[180,600],[280,600],[80,40],[800,400],],
+      startPos:[[0,0],[110,400],[180,400],[300,200],[180,200],[280,400],[180,80],[280,500],[180,600],[280,600],[80,40],[800,400],],
       cardInFocus: -1,
       firstCardDimentions:{},
       secondCardDimentions:{},
@@ -54,13 +57,19 @@ class Projects extends React.Component {
     this.handleTestClick = this.handleTestClick.bind(this);
     this.listenOff = this.listenOff.bind(this);
     this.listenOn = this.listenOn.bind(this);
+    this.aFunction = this.aFunction.bind(this)
+    this.funk = this.funk.bind(this)
 
     this.firstCardReff = React.createRef();
     this.secondCardReff = React.createRef();
     this.thirdCardReff = React.createRef();
     this.mainContainerReff = React.createRef();
+    this.animeReff = React.createRef();
+    this.objRef = React.createRef();
 
   }
+
+  
   listenOff(){
     console.log("listenOn")
     this.setState({isTestOnHover:false})
@@ -90,10 +99,12 @@ return {x:x,y:y}
   }
 
   handleMouseOver(e){
+
    // console.log( e.currentTarget.id)
     this.setState({isOnHover:true,cardInFocus:e.currentTarget.id})
   } 
    handleMouseLeave(e){
+
 
     this.setState({isOnHover:false,cardInFocus:-1})
   } 
@@ -191,9 +202,61 @@ else{                                                                        // 
 /*console.log(this.firstCardReff.current.offsetLeft);
 console.log(this.firstCardReff.current.offsetTop);*/
     window.addEventListener('resize', this.handleResize)
-  }
-  render() {
+        var path = anime.path(this.animeReff.current);
 
+    var motionPath = anime({
+      targets: '.blue',
+      translateX: path('x'),
+      translateY: path('y'),
+/*      rotate: path('angle'),*/
+      easing:"linear",
+      duration:50000,
+      loop: true
+    });
+    var motionPath1 = anime({
+      targets: '.icons',
+      translateX: path('x'),
+      translateY: path('y'),
+/*      rotate: path('angle'),*/
+      easing:"linear",
+      duration:10000,
+      loop: true
+    });
+        var motionPath2 = anime({
+      targets: '.orange',
+      translateX: path('x'),
+      translateY: path('y'),
+/*      rotate: path('angle'),*/
+      easing:"linear",
+      duration:30000,
+      loop: true
+    });
+
+  }
+
+
+
+  aFunction(){
+   // console.log(this.animeReff.current)
+
+
+           // console.log(motionPath1)
+  }
+  funk(){
+this.motionPath1 = anime({
+      targets: '.red',
+
+/*      rotate: path('angle'),*/
+      easing:"linear",
+      duration:10000,
+      loop: true
+    });
+/* this.objRef.current.motionPath.pause()*/
+  }
+
+
+  render() {
+console.log(this.motionPath)
 //console.log(this.state.isOnHover)
 //console.log(this.state.secondCardDimentions);
 //console.log(this.state.mainContainerDimentions);
@@ -202,19 +265,28 @@ console.log(this.firstCardReff.current.offsetTop);*/
 
 console.log(this.state.thirdCardDimentions);*/
     return (<div>
-{/*      <div className="filler"> asdasd</div>*/}
 
-
-
-{/*
+<button onClick={this.funk}>aaaaaaaa</button>
       <div ref={this.mainContainerReff} className="mainContainer">
-        <Orbit iconNr= {0} startPos={this.getIconStartPos(0)} destination={{x:400,y:500}} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isTestOnHover} delay = {100}/>
-        <button onClick={this.handleTestClick}>aaaa</button>
-      </div>
-{/*       <div className="filler"> asdasd</div>*/}
-      
 
-      <div ref={this.mainContainerReff} className="mainContainer">
+
+
+
+        <div id="anime-demo" className="card">  
+          <svg style={{position:"absolute"}} width="600" height="300" ><path ref={this.animeReff}
+           d="m 154 97 a 148 32 -30 0 0 26 68 a -148 -32 -30 0 0 -26 -68" stroke="black" strokeWidth= "1px" fill="none"/>
+          </svg>
+          <div ref={this.objRef} className="square blue"></div>
+          <div className="square red">
+                    <Comp1  iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
+</div>
+            <div className="square orange"></div>
+
+            <div className="square green"></div>
+        </div>
+
+
+
 
         <div 
           id={0} 

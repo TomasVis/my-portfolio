@@ -9,15 +9,23 @@ class Shop extends React.Component {
     this.state = {
       isHover:false
     };
-        this.animeReff = React.createRef();
+    this.animeReff = React.createRef();
+    this.objRef = React.createRef();
+
+
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.aFunction = this.aFunction.bind(this)
   }
   handleMouseEnter(){
     this.setState({isHover:!this.state.isHover})
   }
+componentDidMount(){
+	this.aFunction();
+	  		console.log(this.objRef.current)
+}
 
-  aFunction(){
+
+aFunction(){
    // console.log(this.animeReff.current)
     var path = anime.path(this.animeReff.current);
 
@@ -57,24 +65,22 @@ class Shop extends React.Component {
       duration:20000,
       loop: true
     });
-            console.log(motionPath1)
+  //          console.log(motionPath1)
   }
 
   render() {
-    return (<div style={{position:"absolute"}}>
-      <div style={{position:"absolute",top:80,left:120,width:"80px",height:"80px",backgroundColor:"red",borderRadius: "50%",zIndex:100}}></div>
 
-<div id="anime-demo" >
-  
-<svg style={{position:"absolute"}} width="600" height="300" ><path ref={this.animeReff}
- d="m 154 97 a 148 32 -30 0 0 26 68 a -148 -32 -30 0 0 -26 -68" stroke="black" strokeWidth= "1px" fill="none"/>
-</svg>
+    return (<div >
+{/*      <div style={{position:"absolute",top:80,left:120,width:"80px",height:"80px",backgroundColor:"red",borderRadius: "50%",zIndex:100}}></div>*/}
 
-
-  <div className="square blue"></div>
- <div className="square red"></div>
-   <div className="square orange"></div>
-  <div className="square green"></div>
+<div id="anime-demo" >  
+	<svg style={{position:"absolute"}} width="600" height="300" ><path ref={this.animeReff}
+	 d="m 154 97 a 148 32 -30 0 0 26 68 a -148 -32 -30 0 0 -26 -68" stroke="black" strokeWidth= "1px" fill="none"/>
+	</svg>
+	<div ref={this.objRef} className="square blue"></div>
+ 	<div className="square red"></div>
+   	<div className="square orange"></div>
+  	<div className="square green"></div>
 </div>
 
 {/*<div className="color-codes">
