@@ -22,13 +22,6 @@ import wordpress from '../assets/icons/wordpress.svg';
 
 const trans = (x, y, o) =>{ return ` translate(${x}px,${y}px)`}
 const transOp = (x, y, o) =>{ return `${o}`}
-/*const icons = [
-"http://pluspng.com/img-png/logo-mongodb-png-mongodb-logo-anything-but-the-simplest-of-web-applications-requires-a-database-to-store-and-serve-content-from-choosing-the-right-database-and-structuring-413.png",
-"https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/026/full/react.png",
-"https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg",
-"https://cdn.worldvectorlogo.com/logos/html5.svg"
-
-];*/
 const icon = [html5 , css3,  javascript, bootstrap ,jquery ,mongodb ,nodejs ,php, react ,sass ,wordpress, github ];
 
 
@@ -39,13 +32,12 @@ function Comp1(props) {
 useEffect(() => {
   setTimeout(() => set(props.isOnHover ? {xyo: [props.destination.x , props.destination.y , props.destination.o ? 1:1]} :
    {xyo: [props.startPos.x,props.startPos.y,1]}), props.delay)
-   // set(props.isOnHover?{xyo: [props.dimentions.x,props.dimentions.y,1]}:{xyo: [0,0,0.01]})
     //console.log('count changed', props.destination);
 
 
 }, [props.isOnHover])
   return (
-    <div className="icons"  >
+    <div className="icons blue"  >
       <animated.div
          style={{ transform: val.xyo.interpolate(trans),opacity: val.xyo.interpolate(transOp)}}>
         

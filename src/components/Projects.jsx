@@ -13,8 +13,16 @@ import Comp1 from './Comp1';
 import Orbit from './IconOrbit';
 import Card from './Card';
 import Shop from '../Shop';
+import Animation from './Svg';
 import anime from 'animejs/lib/anime.es.js';
-import Anime from 'react-anime';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+//import Anime from 'react-anime';
+/*import ReactAnime from 'react-animejs'
+const {Anime, stagger} = ReactAnime*/
+
+import Box from "./animejs"
+
+
 
 
 
@@ -39,6 +47,10 @@ class Projects extends React.Component {
       thirdIconStartPos:{},
       fourthIconStartPos:{},
       windowDimentions:{width:window.innerWidth,height:window.innerHeight},
+
+      translateX: 0,
+    translateY: 0,
+
 
 
 
@@ -69,7 +81,7 @@ class Projects extends React.Component {
 
   }
 
-  
+
   listenOff(){
     console.log("listenOn")
     this.setState({isTestOnHover:false})
@@ -83,7 +95,21 @@ class Projects extends React.Component {
       isTestOnHover:!this.state.isTestOnHover
     })
   }
+getIconStartPosNEW(){
+  if(this.objRef.current){
 
+console.log(this.getBoundingClientRect(this.objRef.current))
+
+
+let x = this.getBoundingClientRect(this.objRef.current).x
+let y= this.getBoundingClientRect(this.objRef.current).y
+
+return {x:x,y:y}
+ 
+        
+}
+else return {x:0,y:0}
+}
 
   getIconStartPos(iconNum){
     const {  startPos } = this.state;
@@ -166,9 +192,9 @@ else{                                                                        // 
 
   }
   // converts boundingClient object to normal object
-/*  getBoundingClientRect (element)  { const {top, right, bottom, left, width, height, x, y} = element.getBoundingClientRect();
+  getBoundingClientRect (element)  { const {top, right, bottom, left, width, height, x, y} = element.getBoundingClientRect();
     return {top, right, bottom, left, width, height, x, y} 
-  }*/
+  }
 
   handleResize() {  
      /* this.setState({
@@ -214,7 +240,7 @@ console.log(this.firstCardReff.current.offsetTop);*/
       loop: true
     });
     var motionPath1 = anime({
-      targets: '.icons',
+      targets: '.orange',
       translateX: path('x'),
       translateY: path('y'),
 /*      rotate: path('angle'),*/
@@ -256,7 +282,14 @@ this.motionPath1 = anime({
 
 
   render() {
-console.log(this.motionPath)
+
+    const { translateX, translateY } = this.state;
+
+
+
+
+
+console.log(this.state.translateX)
 //console.log(this.state.isOnHover)
 //console.log(this.state.secondCardDimentions);
 //console.log(this.state.mainContainerDimentions);
@@ -266,20 +299,32 @@ console.log(this.motionPath)
 console.log(this.state.thirdCardDimentions);*/
     return (<div>
 
+            <div className="card">
+
+        <Box isOnHover={this.state.isOnHover} translateX={translateX} translateY={translateY} />
+        <div className={this.state.isOnHover ? "wtf ":"square blue"} style={this.state.isOnHover ? {transform:"translateX(10px),translateY(10px)"}:{opacity:0.5}}>                 <Comp1  iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
+</div>
+      </div>
+
+
+
 <button onClick={this.funk}>aaaaaaaa</button>
       <div ref={this.mainContainerReff} className="mainContainer">
-
-
-
+{/*<div className="card">
+<Animation myProp={{duration:5000}}/>
+</div>*/}
 
         <div id="anime-demo" className="card">  
           <svg style={{position:"absolute"}} width="600" height="300" ><path ref={this.animeReff}
-           d="m 154 97 a 148 32 -30 0 0 26 68 a -148 -32 -30 0 0 -26 -68" stroke="black" strokeWidth= "1px" fill="none"/>
+           d="m 100 100 a 192 37 -17 1 1 28 60 a -188 -37 -17 0 1 -28 -60" stroke="black" strokeWidth= "1px" fill="none"/>
           </svg>
           <div ref={this.objRef} className="square blue"></div>
-          <div className="square red">
-                    <Comp1  iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
-</div>
+
+          <div  className={this.state.isOnHover ? "wtf ":"square blue"} style={this.state.isOnHover ? {transform:"translateX(10px)"}:{opacity:0.5}}>
+
+
+          </div>
+
             <div className="square orange"></div>
 
             <div className="square green"></div>
@@ -321,7 +366,7 @@ console.log(this.state.thirdCardDimentions);*/
                 
         </div>
 
-       <Comp1 iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
+       <Comp1 iconNr= {0} startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
        <Comp1 iconNr= {1} startPos={this.getIconStartPos(1)} destination={this.getIconPositions(1)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {200}/>
         <Comp1 iconNr= {2} startPos={this.getIconStartPos(2)} destination={this.getIconPositions(2)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {300}/>
         <Comp1 iconNr= {3} startPos={this.getIconStartPos(3)} destination={this.getIconPositions(3)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {400}/>

@@ -16,14 +16,14 @@ function handleChange(event) {
   const localProps = useSpring({
     number: 1,
     from: { number: 0},
-    reset: loop % 2 === 0,
+    reset: true,
     onRest: () => setLoop(loop => (loop % 2 === 0 ? 1 : 2)),
      config: props.myProp
   });
 
   const interpolate = (number) => {
   	  	//console.log(pathRef.current ?pathRef.current.getTotalLength():0)
-//console.log(props.myProp)
+console.log( pathRef.current)
     const pathLength = pathRef.current ? pathRef.current.getTotalLength() : 0;
     const { x, y } = pathRef.current
       ? pathRef.current.getPointAtLength(number * pathLength)

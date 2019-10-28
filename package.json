@@ -5,6 +5,7 @@
   "dependencies": {
     "animejs": "^3.1.0",
     "react": "^16.10.2",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-anime": "^2.2.0",
     "react-animejs": "^0.5.3",
     "react-dom": "^16.10.2",
