@@ -13,13 +13,29 @@ export default class Box extends React.Component {
   }
   componentWillReceiveProps(){
   	console.log("props on the way")
+    if(this.smth) { var path = anime.path(this.smth);}
+        let animation = 
+    anime({
+      targets: '.black',
+      translateX: path('x'),
+      translateY: path('y'),
+      easing:"linear",
+      duration:300,
+      loop: true
+    });
+
   	
   }
 
 
 
-  anime = () => {
-  	if(this.smth)  var path = anime.path(this.smth);
+  anime(someVal)  {
+    console.log("someVal")
+  	if(this.smth) { var path = anime.path(this.smth);}
+        if(this.props.isOnHover){
+      
+//animation.pause();
+    }
   	
   	//console.log(path('x'))
 	//let pause = this.props.isOnHover;
@@ -30,14 +46,11 @@ export default class Box extends React.Component {
       translateX: path('x'),
       translateY: path('y'),
       easing:"linear",
-      duration:30000,
+      duration:300,
       loop: true
     });
 
-  	if(this.props.isOnHover){
-  		console.log("suveike")
-//animation.pause();
-  	}
+
     //const { translateX, translateY } = this.props;
 	
 }

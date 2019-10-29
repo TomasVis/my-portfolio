@@ -302,7 +302,8 @@ console.log(this.state.thirdCardDimentions);*/
             <div className="card">
 
         <Box isOnHover={this.state.isOnHover} translateX={translateX} translateY={translateY} />
-        <div className={this.state.isOnHover ? "wtf ":"square blue"} style={this.state.isOnHover ? {transform:"translateX(10px),translateY(10px)"}:{opacity:0.5}}>                 <Comp1  iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
+        <div className={this.state.isOnHover ? "wtf ":"square blue"} style={this.state.isOnHover ? {transform:"translateX(10px),translateY(10px)"}:{opacity:0.5}}>                
+         <Comp1  iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
 </div>
       </div>
 
