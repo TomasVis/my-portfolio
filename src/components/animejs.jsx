@@ -12,6 +12,7 @@ export default class Box extends React.Component {
    // this.anime();
   }
   componentWillReceiveProps(){
+    console.log(this.anime)
   	console.log("props on the way")
     if(this.smth) { var path = anime.path(this.smth);}
         let animation = 
@@ -20,7 +21,7 @@ export default class Box extends React.Component {
       translateX: path('x'),
       translateY: path('y'),
       easing:"linear",
-      duration:300,
+      duration:3000,
       loop: true
     });
 
@@ -62,7 +63,7 @@ export default class Box extends React.Component {
                 <svg style={{position:"absolute"}} width="600" height="300" >
                 	<path ref={smth => (this.smth = smth)} 
                   	d="m 100 100 a 192 37 -17 1 1 28 60 a -188 -37 -17 0 1 -28 -60" stroke="black" strokeWidth= "1px" fill="none"/>
-			        <div className=" black"></div>
+			        <div className="black"></div>
 			        <div className=" red"></div>
           		</svg>
 </div>

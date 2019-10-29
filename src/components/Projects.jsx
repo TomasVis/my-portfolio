@@ -14,8 +14,9 @@ import Orbit from './IconOrbit';
 import Card from './Card';
 import Shop from '../Shop';
 import Animation from './Svg';
-import anime from 'animejs/lib/anime.es.js';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Demo from './tween';
+//import anime from 'animejs/lib/anime.es.js';
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 //import Anime from 'react-anime';
 /*import ReactAnime from 'react-animejs'
 const {Anime, stagger} = ReactAnime*/
@@ -70,7 +71,7 @@ class Projects extends React.Component {
     this.listenOff = this.listenOff.bind(this);
     this.listenOn = this.listenOn.bind(this);
     this.aFunction = this.aFunction.bind(this)
-    this.funk = this.funk.bind(this)
+
 
     this.firstCardReff = React.createRef();
     this.secondCardReff = React.createRef();
@@ -78,6 +79,7 @@ class Projects extends React.Component {
     this.mainContainerReff = React.createRef();
     this.animeReff = React.createRef();
     this.objRef = React.createRef();
+    const ref = React.createRef();
 
   }
 
@@ -96,9 +98,10 @@ class Projects extends React.Component {
     })
   }
 getIconStartPosNEW(){
-  if(this.objRef.current){
+  console.log("called")
+  if(this.ref){
 
-console.log(this.getBoundingClientRect(this.objRef.current))
+console.log(this.getBoundingClientRect(this.ref.current))
 
 
 let x = this.getBoundingClientRect(this.objRef.current).x
@@ -228,35 +231,8 @@ else{                                                                        // 
 /*console.log(this.firstCardReff.current.offsetLeft);
 console.log(this.firstCardReff.current.offsetTop);*/
     window.addEventListener('resize', this.handleResize)
-        var path = anime.path(this.animeReff.current);
 
-    var motionPath = anime({
-      targets: '.blue',
-      translateX: path('x'),
-      translateY: path('y'),
-/*      rotate: path('angle'),*/
-      easing:"linear",
-      duration:50000,
-      loop: true
-    });
-    var motionPath1 = anime({
-      targets: '.orange',
-      translateX: path('x'),
-      translateY: path('y'),
-/*      rotate: path('angle'),*/
-      easing:"linear",
-      duration:10000,
-      loop: true
-    });
-        var motionPath2 = anime({
-      targets: '.orange',
-      translateX: path('x'),
-      translateY: path('y'),
-/*      rotate: path('angle'),*/
-      easing:"linear",
-      duration:30000,
-      loop: true
-    });
+
 
   }
 
@@ -268,17 +244,7 @@ console.log(this.firstCardReff.current.offsetTop);*/
 
            // console.log(motionPath1)
   }
-  funk(){
-this.motionPath1 = anime({
-      targets: '.red',
 
-/*      rotate: path('angle'),*/
-      easing:"linear",
-      duration:10000,
-      loop: true
-    });
-/* this.objRef.current.motionPath.pause()*/
-  }
 
 
   render() {
@@ -289,7 +255,6 @@ this.motionPath1 = anime({
 
 
 
-console.log(this.state.translateX)
 //console.log(this.state.isOnHover)
 //console.log(this.state.secondCardDimentions);
 //console.log(this.state.mainContainerDimentions);
@@ -299,39 +264,26 @@ console.log(this.state.translateX)
 console.log(this.state.thirdCardDimentions);*/
     return (<div>
 
-            <div className="card">
 
-        <Box isOnHover={this.state.isOnHover} translateX={translateX} translateY={translateY} />
-        <div className={this.state.isOnHover ? "wtf ":"square blue"} style={this.state.isOnHover ? {transform:"translateX(10px),translateY(10px)"}:{opacity:0.5}}>                
-         <Comp1  iconNr= {0} startPos={this.getIconStartPos(0)} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
-</div>
-      </div>
 
 
 
 <button onClick={this.funk}>aaaaaaaa</button>
       <div ref={this.mainContainerReff} className="mainContainer">
-{/*<div className="card">
-<Animation myProp={{duration:5000}}/>
-</div>*/}
-
-        <div id="anime-demo" className="card">  
-          <svg style={{position:"absolute"}} width="600" height="300" ><path ref={this.animeReff}
-           d="m 100 100 a 192 37 -17 1 1 28 60 a -188 -37 -17 0 1 -28 -60" stroke="black" strokeWidth= "1px" fill="none"/>
-          </svg>
-          <div ref={this.objRef} className="square blue"></div>
-
-          <div  className={this.state.isOnHover ? "wtf ":"square blue"} style={this.state.isOnHover ? {transform:"translateX(10px)"}:{opacity:0.5}}>
 
 
-          </div>
-
-            <div className="square orange"></div>
-
-            <div className="square green"></div>
-        </div>
 
 
+<div  >
+
+        <Comp1 iconNr= {2} startPos={this.getIconStartPos(2)} destination={this.getIconPositions(2)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {300}/>
+
+<Demo ref={this.ref}  startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(2)}
+cardInFocus={this.state.cardInFocus}
+isOnHover = {this.state.isOnHover} delay = {300}
+/>
+
+</div>
 
 
         <div 

@@ -40,7 +40,7 @@ body {
 .button{
   position: absolute;
   top:0;
-  z-index: 100;
+  z-index: 3;
 /*pointer-events: none; */
   opacity: 0.5;
 }
@@ -273,4 +273,18 @@ button:hover {
 .controls {
   margin-top: 20px;
   text-align: center;
+}
+.black{
+
+  width:20px;
+  height: 20px;
+  background-color: black;
+
+}
+.code-box-shape{
+  position: relative;
+z-index: 5;
+   width:20px;
+  height: 20px;
+  background-color: red;
 }

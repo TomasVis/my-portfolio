@@ -37,7 +37,7 @@ useEffect(() => {
 
 }, [props.isOnHover])
   return (
-    <div className="icons"  >
+    <div className="icons "  >
       <animated.div
          style={{ transform: val.xyo.interpolate(trans),opacity: val.xyo.interpolate(transOp)}}>
         

@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "animejs": "^3.1.0",
+    "prop-types": "^15.7.2",
+    "rc-tween-one": "^2.6.5",
     "react": "^16.10.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-anime": "^2.2.0",
