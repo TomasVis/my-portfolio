@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animejs": "^3.1.0",
+    "component-css-extractor": "^1.0.0",
     "prop-types": "^15.7.2",
     "rc-tween-one": "^2.6.5",
     "react": "^16.10.2",

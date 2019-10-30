@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react'
+import React, {useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { useSpring, animated, config } from 'react-spring'
 
@@ -14,6 +14,7 @@ import php from '../assets/icons/php.png';
 import react from '../assets/icons/react.png';
 import sass from '../assets/icons/sass.png';
 import wordpress from '../assets/icons/wordpress.svg';
+import extractCSS from 'component-css-extractor'
 
 
 //import './styles.css'
@@ -25,20 +26,40 @@ const transOp = (x, y, o) =>{ return `${o}`}
 const icon = [html5 , css3,  javascript, bootstrap ,jquery ,mongodb ,nodejs ,php, react ,sass ,wordpress, github ];
 
 
+
 function Comp1(props) {
+const daRef = useRef(null);
+
+//-daRef.current.getBoundingClientRect(daRef.current).x+window.scrollX
+//-daRef.current.getBoundingClientRect(daRef.current).y+window.scrollY
+
 
   const [val, set ] = useSpring(() => ({ xyo: [props.startPos.x,props.startPos.y,1],config: config.slow}))
-//console.log(props.startPos)
+//console.log(props)
 useEffect(() => {
-  setTimeout(() => set(props.isOnHover ? {xyo: [props.destination.x , props.destination.y , props.destination.o ? 1:1]} :
+//console.log("bounding client "+daRef.current.getBoundingClientRect(daRef.current).y)
+//console.log("window scrool "+window.scrollY)
+//console.log(daRef.current.getBoundingClientRect(daRef.current).x+window.scrollX)
+//console.log(props.destination.x)
+//console.log("ateina is props "+props.destination.y)
+let x = 0
+let y = 0
+props.isOnHover ? x=props.destination.x-daRef.current.getBoundingClientRect(daRef.current).x-window.scrollX:x=0;
+props.isOnHover ? y=props.destination.y-daRef.current.getBoundingClientRect(daRef.current).y-window.scrollY:y=0;
+//console.log(y)
+  setTimeout(() => set(props.isOnHover ?
+   {xyo: [x,
+    y , 
+    props.destination.o ? 1:1]} :
    {xyo: [props.startPos.x,props.startPos.y,1]}), props.delay)
     //console.log('count changed', props.destination);
 
 
 }, [props.isOnHover])
   return (
-    <div className="icons "  >
-      <animated.div
+    <div ref={daRef} className="icons "  >
+      <animated.div 
+     
          style={{ transform: val.xyo.interpolate(trans),opacity: val.xyo.interpolate(transOp)}}>
         
         <img src={icon[props.iconNr]}/>

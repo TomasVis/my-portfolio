@@ -37,7 +37,7 @@ class Projects extends React.Component {
     this.state = {
       id:null,
       isOnHover:false,
-      startPos:[[0,0],[110,400],[180,400],[300,200],[180,200],[280,400],[180,80],[280,500],[180,600],[280,600],[80,40],[800,400],],
+//      startPos:[[0,0],[110,400],[180,400],[300,200],[180,200],[280,400],[180,80],[280,500],[180,600],[280,600],[80,40],[800,400],],
       cardInFocus: -1,
       firstCardDimentions:{},
       secondCardDimentions:{},
@@ -66,11 +66,11 @@ class Projects extends React.Component {
 /*    this.getBoundingClientRect = this.getBoundingClientRect.bind(this);
 */    this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.getIconStartPos = this.getIconStartPos.bind(this);
+ //   this.getIconStartPos = this.getIconStartPos.bind(this);
     this.handleTestClick = this.handleTestClick.bind(this);
     this.listenOff = this.listenOff.bind(this);
     this.listenOn = this.listenOn.bind(this);
-    this.aFunction = this.aFunction.bind(this)
+
 
 
     this.firstCardReff = React.createRef();
@@ -97,11 +97,11 @@ class Projects extends React.Component {
       isTestOnHover:!this.state.isTestOnHover
     })
   }
-getIconStartPosNEW(){
-  console.log("called")
+/*getIconStartPosNEW(){
+  //console.log("called")
   if(this.ref){
 
-console.log(this.getBoundingClientRect(this.ref.current))
+//console.log(this.getBoundingClientRect(this.ref.current))
 
 
 let x = this.getBoundingClientRect(this.objRef.current).x
@@ -112,9 +112,9 @@ return {x:x,y:y}
         
 }
 else return {x:0,y:0}
-}
+}*/
 
-  getIconStartPos(iconNum){
+/*  getIconStartPos(iconNum){
     const {  startPos } = this.state;
     let x = startPos[iconNum][0] >=0 ?  startPos[iconNum][0] :  this.state.mainContainerDimentions.width + startPos[iconNum][0] ;
     let y = startPos[iconNum][1] >=0 ? startPos[iconNum][1] : this.state.mainContainerDimentions.height + startPos[iconNum][1] ;
@@ -125,7 +125,7 @@ else return {x:0,y:0}
 
 return {x:x,y:y}
 
-  }
+  }*/
 
   handleMouseOver(e){
 
@@ -156,7 +156,7 @@ return {x:x,y:y}
               {x:0,y:0} 
 
     let arr = cardInFocus==0 ? [0,1,2,3,4,5]:                        // arr represents array that controlls wheather the icon should go to the card, or stay in its initial position
-              cardInFocus==1 ? [2,3]:                          // each number in array represents the icon which needs to know where to go
+              cardInFocus==1 ? [0,2,3]:                          // each number in array represents the icon which needs to know where to go
               cardInFocus==2 ? [0,1,3]:
               [0,1,2,3]
 
@@ -169,9 +169,9 @@ let answ= {};
 //console.log("iconNum "+iconNum)
 if(!arr.includes(iconNum)){                                      // if icon number is not in the array the icon gets destination of its initial position
   //console.log("not includes "+iconNum)
-    let x = startPos[iconNum][0] >= 0 ?  startPos[iconNum][0] :  width + startPos[iconNum][0] ;
-    let y = startPos[iconNum][1] >= 0 ? startPos[iconNum][1] : height + startPos[iconNum][1] ;
-   answ = val = {x:x,y:y} 
+/*    let x = startPos[iconNum][0] >= 0 ?  startPos[iconNum][0] :  width + startPos[iconNum][0] ;
+    let y = startPos[iconNum][1] >= 0 ? startPos[iconNum][1] : height + startPos[iconNum][1] ;*/
+   answ = val = {x:0,y:0} 
 
 }
 else{                                                                        // adds arbitrary number to x axis for individual icon alignment
@@ -200,36 +200,78 @@ else{                                                                        // 
   }
 
   handleResize() {  
-     /* this.setState({
-        firstCardDimentions:this.getBoundingClientRect(this.firstCardReff.current),
-       secondCardDimentions:this.getBoundingClientRect(this.secondCardReff.current),
-        thirdCardDimentions:this.getBoundingClientRect(this.thirdCardReff.current),
-        mainContainerDimentions:this.getBoundingClientRect(this.mainContainerReff.current),
-        windowDimentions:{width:window.innerWidth,height:window.innerHeight}
-      }) */
+
       if(this.firstCardReff.current){
-       this.setState({
+/*       this.setState({
         firstCardDimentions:{x:this.firstCardReff.current.offsetLeft,y:this.firstCardReff.current.offsetTop},
        secondCardDimentions:{x:this.secondCardReff.current.offsetLeft,y:this.secondCardReff.current.offsetTop},
         thirdCardDimentions:{x:this.thirdCardReff.current.offsetLeft,y:this.thirdCardReff.current.offsetTop},
         mainContainerDimentions:{height:this.mainContainerReff.current.offsetHeight,width:this.mainContainerReff.current.offsetWidth}
-/*        windowDimentions:{width:window.innerWidth,height:window.innerHeight}*/
-      }) 
+
+      }) */
+            this.setState({
+        
+        firstCardDimentions:
+        {
+          x:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).x-window.scrollX,
+          y:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).y-window.scrollY
+        },
+       secondCardDimentions:
+       {
+        x:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).x-window.scrollX,
+        y:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).y-window.scrollY
+      },
+        thirdCardDimentions:
+        {
+        x:this.thirdCardReff.current.getBoundingClientRect(this.thirdCardReff.current).x-window.scrollX,
+        y:this.thirdCardReff.current.getBoundingClientRect(this.thirdCardReff.current).y-window.scrollY
+        },
+         mainContainerDimentions:
+         {
+        x:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).x-window.scrollX,
+        y:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).y-window.scrollY
+        }
+
+      })
 
 }
   }
 
   componentDidMount() {
       this.setState({
+        
+        firstCardDimentions:
+        {
+          x:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).x-window.scrollX,
+          y:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).y-window.scrollY
+        },
+       secondCardDimentions:
+       {
+        x:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).x-window.scrollX,
+        y:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).y-window.scrollY
+      },
+        thirdCardDimentions:
+        {
+        x:this.thirdCardReff.current.getBoundingClientRect(this.thirdCardReff.current).x-window.scrollX,
+        y:this.thirdCardReff.current.getBoundingClientRect(this.thirdCardReff.current).y-window.scrollY
+        },
+         mainContainerDimentions:
+         {
+        x:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).x-window.scrollX,
+        y:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).y-window.scrollY
+        }
+
+      }) 
+
+/*      this.setState({
         firstCardDimentions:{x:this.firstCardReff.current.offsetLeft,y:this.firstCardReff.current.offsetTop},
        secondCardDimentions:{x:this.secondCardReff.current.offsetLeft,y:this.secondCardReff.current.offsetTop},
         thirdCardDimentions:{x:this.thirdCardReff.current.offsetLeft,y:this.thirdCardReff.current.offsetTop},
          mainContainerDimentions:{height:this.mainContainerReff.current.offsetHeight,width:this.mainContainerReff.current.offsetWidth}
-/*         windowDimentions:{width:window.innerWidth,height:window.innerHeight}*/
-      }) 
 
-/*console.log(this.firstCardReff.current.offsetLeft);
-console.log(this.firstCardReff.current.offsetTop);*/
+      }) */
+
+
     window.addEventListener('resize', this.handleResize)
 
 
@@ -238,12 +280,7 @@ console.log(this.firstCardReff.current.offsetTop);*/
 
 
 
-  aFunction(){
-   // console.log(this.animeReff.current)
 
-
-           // console.log(motionPath1)
-  }
 
 
 
@@ -255,7 +292,7 @@ console.log(this.firstCardReff.current.offsetTop);*/
 
 
 
-//console.log(this.state.isOnHover)
+console.log(this.getIconPositions(2))
 //console.log(this.state.secondCardDimentions);
 //console.log(this.state.mainContainerDimentions);
 /*console.log(this.state.dimentions);
@@ -268,22 +305,89 @@ console.log(this.state.thirdCardDimentions);*/
 
 
 
-<button onClick={this.funk}>aaaaaaaa</button>
+
       <div ref={this.mainContainerReff} className="mainContainer">
 
 
 
 
-<div  >
 
-        <Comp1 iconNr= {2} startPos={this.getIconStartPos(2)} destination={this.getIconPositions(2)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {300}/>
+<div style={{position:"relative",margin: "30px",width:"460px",height:"230px"}}>
 
-<Demo ref={this.ref}  startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(2)}
-cardInFocus={this.state.cardInFocus}
-isOnHover = {this.state.isOnHover} delay = {300}
+<Demo  
+  //startPos={this.getIconPositions(2)} 
+  destination={this.getIconPositions(0)}
+  cardInFocus={this.state.cardInFocus}
+  isOnHover = {this.state.isOnHover} 
+  delay = {300}
+  duration = {50000}
+  iconNr={0}
+/>
+<Demo  
+  //startPos={this.getIconPositions(0)} 
+  destination={this.getIconPositions(1)}
+  cardInFocus={this.state.cardInFocus}
+  isOnHover = {this.state.isOnHover} 
+  delay = {0}
+  duration = {30000}
+  iconNr={1}
+/>
+<Demo  
+  //startPos={this.getIconPositions(0)} 
+  destination={this.getIconPositions(2)}
+  cardInFocus={this.state.cardInFocus}
+  isOnHover = {this.state.isOnHover} 
+  delay = {0}
+  duration = {100000}
+  iconNr={2}
+/>
+<Demo  
+  //startPos={this.getIconPositions(0)} 
+  destination={this.getIconPositions(3)}
+  cardInFocus={this.state.cardInFocus}
+  isOnHover = {this.state.isOnHover} 
+  delay = {0}
+  duration = {10000}
+  iconNr={3}
+/>
+<Demo  
+  //startPos={this.getIconPositions(0)} 
+  destination={this.getIconPositions(4)}
+  cardInFocus={this.state.cardInFocus}
+  isOnHover = {this.state.isOnHover} 
+  delay = {0}
+  duration = {80000}
+  iconNr={4}
 />
 
 </div>
+
+
+{/*<Demo ref={this.ref}  startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(2)}
+cardInFocus={this.state.cardInFocus}
+isOnHover = {this.state.isOnHover} 
+delay = {300}
+duration = {40000}
+/>
+
+
+
+<Demo ref={this.ref}  startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(2)}
+cardInFocus={this.state.cardInFocus}
+isOnHover = {this.state.isOnHover} 
+delay = {300}
+duration = {30000}
+/>
+
+
+
+<Demo ref={this.ref}  startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(2)}
+cardInFocus={this.state.cardInFocus}
+isOnHover = {this.state.isOnHover} 
+delay = {300}
+duration = {20000}
+/>*/}
+
 
 
         <div 
@@ -319,6 +423,7 @@ isOnHover = {this.state.isOnHover} delay = {300}
                 
         </div>
 
+{/*
        <Comp1 iconNr= {0} startPos={this.getIconStartPosNEW()} destination={this.getIconPositions(0)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {100}/>
        <Comp1 iconNr= {1} startPos={this.getIconStartPos(1)} destination={this.getIconPositions(1)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {200}/>
         <Comp1 iconNr= {2} startPos={this.getIconStartPos(2)} destination={this.getIconPositions(2)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {300}/>
@@ -333,7 +438,7 @@ isOnHover = {this.state.isOnHover} delay = {300}
         <Comp1 iconNr= {11} startPos={this.getIconStartPos(11)} destination={this.getIconPositions(11)} cardInFocus={this.state.cardInFocus}  isOnHover = {this.state.isOnHover} delay = {400}/>
 
 
-
+*/}
 
       </div>
 {/*       <div className="filler"> asdasd</div>*/}
