@@ -330,7 +330,7 @@ console.log(this.state.thirdCardDimentions);*/
 
 <div style={{position:"relative",margin: "30px",width:"460px",height:"230px"}}>
 
-<Demo  
+{/*<Demo  
   //startPos={this.getIconPositions(2)} 
   destination={this.getIconPositions(0)}
   cardInFocus={this.state.cardInFocus}
@@ -379,7 +379,7 @@ console.log(this.state.thirdCardDimentions);*/
   duration = {80000}
   iconNr={4}
   iconMove={this.iconMove(4)}
-/>
+/>*/}
 
 </div>
 
