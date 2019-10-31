@@ -72,7 +72,7 @@ if(this.reff.current){
 </TweenOne>
 
         <svg width="460" height="230">
-          <path d={this.path} fill="none" stroke="rgba(1, 155, 240, 0.2)"/>
+          <path d={this.path} fill="none" stroke="rgba(1, 155, 240, 0)" />
         </svg>
       </div>
     );
