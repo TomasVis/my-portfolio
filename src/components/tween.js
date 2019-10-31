@@ -30,7 +30,7 @@ class Demo extends React.Component {
 
   componentWillReceiveProps(){
   	//console.log(this.ref)
-
+console.log((this.props.isOnHover+" "+this.props.iconMove))
   //console.log(getTranslate(this.reff.current))
 
 if(this.reff.current){
@@ -45,7 +45,7 @@ if(this.reff.current){
   
 
   render() {
-  	console.log(this.props)
+  	
 //this.getStyle()
   	//console.log(this.reff.current)
     return (
@@ -54,7 +54,7 @@ if(this.reff.current){
           animation={this.animation}
           style={{ margin: 0, width: 20, height: 20, transform: 'translate(0px, 0px)' }}
           className="code-box-shape"
-          paused={this.props.isOnHover}
+          paused={this.props.isOnHover&&this.props.iconMove}
         >
 
         <Comp1 
@@ -65,7 +65,9 @@ if(this.reff.current){
 	        destination={this.props.destination} 
 			cardInFocus={this.props.cardInFocus}  
 			isOnHover = {this.props.isOnHover} 
-			delay = {this.props.delay}>
+			delay = {this.props.delay}
+      iconMove = {this.props.iconMove}
+      >
 		</Comp1>
 
 

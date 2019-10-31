@@ -7,6 +7,7 @@ import Shop from './Shop';
 import Projects from './components/Projects';
 import ItemDetail from './ItemDetail';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Demo from './components/tween';
 
 
 function App() {
@@ -14,6 +15,16 @@ function App() {
     <Router >
     <div>
 <Nav/>
+<Demo  
+  //startPos={this.getIconPositions(0)} 
+  destination={0}
+  cardInFocus={0}
+  isOnHover = {0} 
+  delay = {0}
+  duration = {80000}
+  iconNr={4}
+  iconMove={0}
+/>
 <Switch>
   <Route path="/" exact component={Home}/>
   <Route path="/projects" component={Projects}/>
@@ -28,6 +39,7 @@ function App() {
 const Home = () =>(
 <div>
 <h1>Home Page</h1>
+
 </div>
   )
 export default App;

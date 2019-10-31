@@ -44,10 +44,10 @@ useEffect(() => {
 //console.log("ateina is props "+props.destination.y)
 let x = 0
 let y = 0
-props.isOnHover ? x=props.destination.x-daRef.current.getBoundingClientRect(daRef.current).x-window.scrollX:x=0;
-props.isOnHover ? y=props.destination.y-daRef.current.getBoundingClientRect(daRef.current).y-window.scrollY:y=0;
+props.iconMove ? x=props.destination.x-daRef.current.getBoundingClientRect(daRef.current).x-window.scrollX:x=0;
+props.iconMove ? y=props.destination.y-daRef.current.getBoundingClientRect(daRef.current).y-window.scrollY:y=0;
 //console.log(y)
-  setTimeout(() => set(props.isOnHover ?
+  setTimeout(() => set(props.iconMove ?
    {xyo: [x,
     y , 
     props.destination.o ? 1:1]} :
@@ -55,7 +55,7 @@ props.isOnHover ? y=props.destination.y-daRef.current.getBoundingClientRect(daRe
     //console.log('count changed', props.destination);
 
 
-}, [props.isOnHover])
+}, [props.iconMove])
   return (
     <div ref={daRef} className="icons "  >
       <animated.div 
@@ -74,7 +74,7 @@ export default Comp1
 
   const val = useSpring({ 
     from: { transform:`translate(${props.x}px,${props.y}px)`}, 
-    to:{transform:`translate(${props.isOnHover ? 0 : props.x}px,${props.isOnHover ? 0 : props.y}px)`},
+    to:{transform:`translate(${props.iconMove ? 0 : props.x}px,${props.iconMove ? 0 : props.y}px)`},
    config:config.wobbly,
    delay:props.delay
 

@@ -70,6 +70,7 @@ class Projects extends React.Component {
     this.handleTestClick = this.handleTestClick.bind(this);
     this.listenOff = this.listenOff.bind(this);
     this.listenOn = this.listenOn.bind(this);
+    this.iconMove = this.iconMove.bind(this);
 
 
 
@@ -83,7 +84,22 @@ class Projects extends React.Component {
 
   }
 
+  iconMove(iconNum){
 
+     let arr = this.state.cardInFocus==0 ? [0,1,2,3,4,5]:                        // arr represents array that controlls wheather the icon should go to the card, or stay in its initial position
+              this.state.cardInFocus==1 ? [0,2,3]:                          // each number in array represents the icon which needs to know where to go
+              this.state.cardInFocus==2 ? [0,1,3]:
+              []
+    if(arr.includes(iconNum)){ 
+      console.log("ret true")
+      return true
+
+    }  
+    else return false                                   // if icon number is not in the array the icon gets destination of its initial position 
+
+
+
+  }
   listenOff(){
     console.log("listenOn")
     this.setState({isTestOnHover:false})
@@ -322,6 +338,7 @@ console.log(this.state.thirdCardDimentions);*/
   delay = {300}
   duration = {50000}
   iconNr={0}
+  iconMove={this.iconMove(0)}
 />
 <Demo  
   //startPos={this.getIconPositions(0)} 
@@ -331,6 +348,7 @@ console.log(this.state.thirdCardDimentions);*/
   delay = {0}
   duration = {30000}
   iconNr={1}
+  iconMove={this.iconMove(1)}
 />
 <Demo  
   //startPos={this.getIconPositions(0)} 
@@ -340,6 +358,7 @@ console.log(this.state.thirdCardDimentions);*/
   delay = {0}
   duration = {100000}
   iconNr={2}
+  iconMove={this.iconMove(2)}
 />
 <Demo  
   //startPos={this.getIconPositions(0)} 
@@ -349,6 +368,7 @@ console.log(this.state.thirdCardDimentions);*/
   delay = {0}
   duration = {10000}
   iconNr={3}
+  iconMove={this.iconMove(3)}
 />
 <Demo  
   //startPos={this.getIconPositions(0)} 
@@ -358,6 +378,7 @@ console.log(this.state.thirdCardDimentions);*/
   delay = {0}
   duration = {80000}
   iconNr={4}
+  iconMove={this.iconMove(4)}
 />
 
 </div>
