@@ -61,6 +61,7 @@ class App extends React.Component {
     this.listenOff = this.listenOff.bind(this);
     this.listenOn = this.listenOn.bind(this);
     this.iconMove = this.iconMove.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
 
 
 
@@ -72,6 +73,43 @@ class App extends React.Component {
     this.objRef = React.createRef();
     const ref = React.createRef();
 
+  }
+  handleScroll(){
+    console.log("scroll")
+    
+if(this.firstCardReff.current){
+
+this.setState({
+  firstCardDimentions:
+        {
+          x:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).x-window.scrollX,
+          y:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).y-window.scrollY
+        },
+})
+}
+
+    if(this.secondCardReff.current){
+      this.setState({
+        
+        
+       secondCardDimentions:
+       {
+        x:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).x-window.scrollX,
+        y:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).y-window.scrollY
+      },
+        thirdCardDimentions:
+        {
+        x:this.thirdCardReff.current.getBoundingClientRect(this.thirdCardReff.current).x-window.scrollX,
+        y:this.thirdCardReff.current.getBoundingClientRect(this.thirdCardReff.current).y-window.scrollY
+        },
+         mainContainerDimentions:
+         {
+        x:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).x-window.scrollX,
+        y:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).y-window.scrollY
+        }
+
+      }) 
+}
   }
 
   iconMove(iconNum){
@@ -179,21 +217,21 @@ else{                                                                        // 
 
   handleResize() {  
 
-      if(this.firstCardReff.current){
-/*       this.setState({
-        firstCardDimentions:{x:this.firstCardReff.current.offsetLeft,y:this.firstCardReff.current.offsetTop},
-       secondCardDimentions:{x:this.secondCardReff.current.offsetLeft,y:this.secondCardReff.current.offsetTop},
-        thirdCardDimentions:{x:this.thirdCardReff.current.offsetLeft,y:this.thirdCardReff.current.offsetTop},
-        mainContainerDimentions:{height:this.mainContainerReff.current.offsetHeight,width:this.mainContainerReff.current.offsetWidth}
+if(this.firstCardReff.current){
 
-      }) */
-            this.setState({
-        
-        firstCardDimentions:
+this.setState({
+  firstCardDimentions:
         {
           x:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).x-window.scrollX,
           y:this.firstCardReff.current.getBoundingClientRect(this.firstCardReff.current).y-window.scrollY
         },
+})
+}
+
+    if(this.secondCardReff.current){
+      this.setState({
+        
+        
        secondCardDimentions:
        {
         x:this.secondCardReff.current.getBoundingClientRect(this.secondCardReff.current).x-window.scrollX,
@@ -210,8 +248,7 @@ else{                                                                        // 
         y:this.mainContainerReff.current.getBoundingClientRect(this.mainContainerReff.current).y-window.scrollY
         }
 
-      })
-
+      }) 
 }
   }
 
@@ -250,7 +287,9 @@ this.setState({
       }) 
 }
 
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener('resize', this.handleResize);
+    window.addEventListener('scroll', this.handleScroll);
+
 
   }
 
@@ -273,7 +312,13 @@ this.setState({
 <Cards ref={this.firstCardReff} id={0} someProp="a" mouseLeave={this.handleMouseLeave}   mouseOver={this.handleMouseOver}
 listenOn={this.listenOn} listenOff={this.listenOff} id={0}  cardInFocus={this.state.cardInFocus} isOnHover = {this.state.isOnHover} isTestOnHover = {this.state.isTestOnHover}
 />
-<div style={{position:"relative",margin: "30px",width:"460px",height:"230px"}}>
+<Cards ref={this.secondCardReff} id={1} someProp="a" mouseLeave={this.handleMouseLeave}   mouseOver={this.handleMouseOver}
+listenOn={this.listenOn} listenOff={this.listenOff} id={1}  cardInFocus={this.state.cardInFocus} isOnHover = {this.state.isOnHover} isTestOnHover = {this.state.isTestOnHover}
+/>
+<Cards ref={this.thirdCardReff} id={2} someProp="a" mouseLeave={this.handleMouseLeave}   mouseOver={this.handleMouseOver}
+listenOn={this.listenOn} listenOff={this.listenOff} id={2}  cardInFocus={this.state.cardInFocus} isOnHover = {this.state.isOnHover} isTestOnHover = {this.state.isTestOnHover}
+/>
+<div style={{position:"fixed",top:0, right:0,margin: "30px",width:"460px",height:"230px"}}>
 
 <Demo  
   //startPos={this.getIconPositions(2)} 

@@ -13,6 +13,7 @@ const Cards = React.forwardRef((props, ref) => (
   //console.log(props)
         <div 
           id={props.id} 
+          style={{width:"460px"}}
           className="wrapper"
           ref={ref}                           
           onMouseOver={props.mouseOver}          
